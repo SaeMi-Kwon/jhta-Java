@@ -1,0 +1,43 @@
+package quiz;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+//3. 파일복사 프로그램을 만들어 보세요. (FileReader/FileWriter사용)
+
+public class Test03 {
+	 public static void main(String[] args) {
+	       FileReader fr=null;
+	       FileWriter fw=null;
+	       try {
+	           //public FileReader(String fileName) throws FileNotFoundException
+	           fr=new FileReader("test.txt");
+	           //public FileWriter(String fileName)  throws IOException
+	           fw=new FileWriter("test2.txt");
+
+	           int n=0;
+	           while((n=fr.read())!=-1) {
+	               fw.write((char)n);
+	           }
+
+	           System.out.println("파일로 복사 완료!!!!!!");
+
+	       }catch(FileNotFoundException fe) {
+	           System.out.println(fe.getMessage());
+	       }catch(IOException ie) {
+	           System.out.println(ie.getMessage());
+	       }finally {
+	           try {
+	               if(fr!=null) fr.close();
+	               if(fw!=null) fw.close();
+	    
+	           }catch(IOException e) {
+	               System.out.println(e.getMessage());
+	           }
+	       }
+	   }
+
+}

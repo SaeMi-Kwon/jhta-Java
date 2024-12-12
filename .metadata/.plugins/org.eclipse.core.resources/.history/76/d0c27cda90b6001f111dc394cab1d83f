@@ -1,0 +1,30 @@
+package day12;
+
+import java.io.File;
+import java.util.Scanner;
+
+/*
+ * 1.디렉토리명(경로포함)을 입력받아 해당 디렉토리 안의 목록중에 파일명만 출력되도록 보여보세요.
+ * 	 만약 디렉토리가 존재하지 않으면 디렉토리를 찾지 못했다는 오류 메시지를 출력해 보세요
+ */
+public class Test03_Quiz {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("디렉토리명(경로포함) 입력");
+		String fileName=scan.next();
+		
+		File f=new File(fileName);
+		
+		if(f.exists()) {
+			File[] flist=f.listFiles();
+			for(File ff:flist) {
+				if(!ff.isDirectory()) {
+					System.out.println(ff.getName());
+				}
+			}
+		}else {
+			System.out.println("디렉토리를 찾지 못했습니다.");
+		}
+		
+	}
+}

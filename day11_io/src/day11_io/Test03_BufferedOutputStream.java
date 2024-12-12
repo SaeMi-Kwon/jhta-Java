@@ -1,0 +1,62 @@
+package day11_io;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+//BufferedOutputStream : 버퍼크기 조절 기능을 갖는 1바이트 출력 스트림	
+public class Test03_BufferedOutputStream {
+	public static void main(String[] args) {
+	
+		try {
+			//public BufferedOutputStream(OutputStream out,int size)
+			//OutputStream out=System.out;  //화면출력
+			OutputStream out = new FileOutputStream("test.dat");  //파일 출력
+			BufferedOutputStream bos = new BufferedOutputStream(out,5);
+			
+			byte[] b= {65,66,67,68,69};
+			
+			bos.write(b);
+			bos.close();
+			
+			System.out.println("파일로 출력 완료!");
+			
+			//BufferedInputStream을 사용해서 test.dat파일을 읽어와 화면에 출력해 보세요.
+			//public BufferedInputStream(InputStream in)		
+			InputStream in = new FileInputStream("test.dat");
+			BufferedInputStream bis = new BufferedInputStream(in);
+		
+			// 방식1
+//			while(true) {
+//				int n=bis.read();
+//				if(n==-1) break;
+//				System.out.println((char)n);  
+//			}
+			
+			//방식2
+			byte[] b1=new byte[100];
+			while(true) {
+				//파일(버퍼)에서 읽어와 b1배열에 저장, n에는 읽어온 바이트수 크기 저장(여기서는 5바이트-영문자5개)
+				//읽어올 데이터가 없으면 n에는 -1 저장
+				//public int read(byte[] b,int off,int len)throws IOException
+				int n=bis.read(b1);
+				if(n==-1) break;
+				//b1배열의 0번째 위치를 n개만큼만 화면에 출력
+				System.out.write(b1,0,n);
+			}
+			
+			
+			
+			bis.close();
+			in.close();
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+	}
+}

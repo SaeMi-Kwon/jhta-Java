@@ -1,0 +1,17 @@
+package day11_io;
+
+import java.io.*;
+
+public class Test01_PrintWriter {
+	public static void main(String[] args) throws Exception {
+	
+		//public PrintWriter(OutputStream out)
+		OutputStream out=System.out;  //화면 출력
+		//OutputStream out=new FileOutputStream("hello.txt");   //파일 출력
+		PrintWriter pw=new PrintWriter(out);
+		pw.println("안녕하세요");
+		pw.println("반갑습니다");
+		pw.close();
+		
+	}
+}

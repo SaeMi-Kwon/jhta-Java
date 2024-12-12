@@ -1,0 +1,20 @@
+package quiz;
+
+/*
+ 	2.아래와 같은 eng.txt파일이 있을때 파일을 읽어와 아래와 같은 작업이 
+ 	이루어지도록 프로그램을 작성해 보세요.
+  	## 파일 eng.txt
+  	love,사랑하다
+  	apple,사과
+  	yellow,노랑
+  	....
+
+  	##프로그램
+  	영어단어:apple
+  	apple의 뜻:사과
+ */
+public class Test02 {
+	public static void main(String[] args) {
+		
+	}
+}

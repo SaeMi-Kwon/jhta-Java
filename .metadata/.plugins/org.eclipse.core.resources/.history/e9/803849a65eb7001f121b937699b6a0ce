@@ -1,0 +1,38 @@
+package day13;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+class MyFrame03 extends JFrame{
+	JTextField txtName=new JTextField(5);
+	JButton btn1=new JButton("합구하기");
+	JLabel lbe=new JLabel();
+	
+	public MyFrame03() {
+		//setLayout(new FlowLayout());
+		
+		
+		
+		lbe.setText("+");
+		lbe.setText("-");
+		
+		add(txtName);
+		add(txtName);
+		add(btn1);
+		add(lbe);
+		
+		txtName.setText("홍길동");
+		setSize(600,500);
+		setVisible(true);
+		
+}
+
+public class Test03_Quiz {
+	public static void main(String[] args) {
+		
+	}
+}

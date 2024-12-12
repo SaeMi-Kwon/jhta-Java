@@ -1,0 +1,16 @@
+package day12;
+
+//재귀메소드 - 자기자신을 호출하는 메소드
+public class Test05_재귀메소드 {
+	public static void main(String[] args) {
+		int n=4;
+		long num=fac(n);
+		System.out.println(n + "! = " + num);
+	}
+	
+	//재귀메소드를 사용해서 팩토리얼값 구하기
+	public static long fac(int n) {
+		return (n>1)? n * fac(n-1) : n;
+	}
+	
+}

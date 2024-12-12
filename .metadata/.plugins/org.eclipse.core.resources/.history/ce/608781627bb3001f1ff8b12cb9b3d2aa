@@ -1,0 +1,25 @@
+package day10;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+//FileWriter : 2바이트 단위로 파일에 출력하는 기능을 갖는 출력스트림클래스
+
+public class Test05_FileWriter {
+	public static void main(String[] args) {
+		
+		try {
+			//public FileWriter(String fileName) throws IOException
+			//파일에 출력하기 위한 2바이트처리 스트림 객체 생성
+			FileWriter fw=new FileWriter("c:\\2407\\hello.txt");
+			fw.write("hello~~~~");
+			fw.write("반가워요~~~");
+			
+			fw.close();
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+	}
+}

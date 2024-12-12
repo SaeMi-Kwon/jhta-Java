@@ -1,0 +1,58 @@
+package day14_thread;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
+/*
+ * 1초에 한번씩 날짜와 시간을 출력하는 스레드를 만들고 실행해 보세요.
+ * 1초에 한번씩 난수를 얻어와 출력하는 스레드를 만들고 실행해 보세요.
+ */
+
+class DateTime extends Thread{
+	public void run() {
+		while(true) {
+//			LocalDateTime t=LocalDateTime.now();
+//			DateTimeFormatter f=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//			String str=t.format(f);			
+			
+			DateTimeFormatter f=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String str=LocalDateTime.now().format(f);
+
+			System.out.println(str);
+			
+			try {
+				Thread.sleep(1000);  //1초간 스레드 멈추기
+			} catch (InterruptedException ie) {
+				System.out.println(ie.getMessage());
+			}  
+		}
+	};
+}
+
+class RandomNum extends Thread{
+	public void run() {
+		while(true) {
+			Random r=new Random();
+			int n=r.nextInt(100)+1;
+			
+			System.out.println(n);
+		
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ie) {
+				System.out.println(ie.getMessage());
+			}
+		}
+	};
+}
+
+public class Test06_Quiz {
+	public static void main(String[] args) {
+		DateTime timeThread=new DateTime();
+		timeThread.start();
+		
+		RandomNum rndThread=new RandomNum();
+		rndThread.start();
+	}
+}

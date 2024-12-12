@@ -1,0 +1,22 @@
+package day09_exception;
+
+import java.util.Scanner;
+
+public class Test06_예외강제로발생시키기 {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("가로길이");
+		int w=scan.nextInt();
+		System.out.println("세로길이");
+		int h=scan.nextInt();
+		
+		int area=boxArea(w,h);
+		System.out.println("사각형넓이:" + area);
+	}
+	
+	public static int boxArea(int w,int h) {
+		int area=w*h;
+		return area;
+	}
+
+}

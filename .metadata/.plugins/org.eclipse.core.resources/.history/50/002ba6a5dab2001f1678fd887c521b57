@@ -1,0 +1,37 @@
+package day09_exception;
+
+import java.util.Scanner;
+
+import test.BoxException;
+
+public class Test06_예외강제로발생시키기 {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("가로길이");
+		int w=scan.nextInt();
+		System.out.println("세로길이");
+		int h=scan.nextInt();
+		
+		try {
+			int area=boxArea(w,h);
+			System.out.println("사각형넓이:" + area);
+			
+		}catch(BoxException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public static int boxArea(int w,int h) throws BoxException {
+		if(w<=0 || h<=0) {
+//			Exception e=new Exception("길이 입력 오류");
+//			throw e;  //예외 강제로 발생시키기
+			//throw new Exception("길이 입력 오류");  //위에 코드를 한줄
+			
+			throw new BoxException("사각형 길이 입력 오류");
+		}
+		int area=w*h;
+		return area;
+	}
+
+}

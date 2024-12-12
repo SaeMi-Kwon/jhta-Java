@@ -1,0 +1,25 @@
+package day09_exception;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+//RuntimeException 상속받는 것만 예외처리를 선택적, 나머지강제
+
+public class Test03_BufferedReader {
+	public static void main(String[] args) {
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		
+		try {
+			System.out.println("한 줄 입력:");
+			
+			//public String readLine() throws IOException
+			String s=br.readLine();
+			System.out.println("입력된 한 줄:" + s);
+			
+		}catch(IOException ie) {
+			System.out.println("오류발생==>" + ie.getMessage());
+		}
+		
+		
+	}
+}

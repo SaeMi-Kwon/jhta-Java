@@ -1,0 +1,43 @@
+package day09_enum;
+
+//사번 이름 직책을 저장하는 클래스를 만들고 사용해 보세요.
+//직책은 enum 사용하기(사장/관리자/사원)
+
+class Employee{
+	private int empNo;
+	private String name;
+	private Position pos;
+	
+	public Employee(int empNo,String name,Position pos) {
+		this.empNo=empNo;
+		this.name=name;
+		this.pos=pos;
+	}
+	
+	@Override
+	public String toString() {
+		String s="사원번호:" + empNo + name + pos.getPos();
+		return super.toString();
+	}
+
+
+enum Position{
+	OWNER("사장"),ADMIN("관리자"),STAFF("사원");
+	
+	private String pos;
+	
+	private Position(String pos) {
+		this.pos=pos;
+	}
+	
+	public String getPos() {
+		return pos;
+	}
+}
+
+public class Test06_Quiz {
+	public static void main(String[] args) {
+		Employee e=new Employee(1,"홍길동",Position.STAFF);
+		System.out.println(e);
+	}
+}

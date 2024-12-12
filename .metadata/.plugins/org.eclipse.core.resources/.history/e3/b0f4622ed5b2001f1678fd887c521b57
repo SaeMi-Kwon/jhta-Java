@@ -1,0 +1,36 @@
+package day09_exception;
+
+import java.util.Scanner;
+
+/*
+ * [예외처리 방법]
+ * - 자바에서는 예외처리 방법이 2가지가 있다.
+ * 
+ * 방법1) 예외가 발생될 수 있는 문장들을 직접 try~catch로 처리하기
+ * 방법2) 예외가 발생될 수 있는 문장들을 직접 try~catch로 처리하지 않고 throws로 떠넘기기
+ * 		 -> throws로 떠넘기면 호출하는 곳에서 try~catch로 예외처리를 해야 한다.
+ */
+public class Test05 {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("첫번째수");
+		int n1=scan.nextInt();
+		System.out.println("두번째수");
+		int n2=scan.nextInt();
+		int n3=div(n1,n2);
+		System.out.println(n1+ "/" + n2 + "=" + n3);
+	}
+	
+	//방법1) 예외가 발생될 수 있는 문장들을 직접 try~catch로 처리하기
+	public static int div(int a,int b) {
+		try {
+			int c=a/b;
+			return c;
+			
+		}catch(ArithmeticException ae) {
+			System.out.println("0으로 나눌수 없어요");
+			return 0;
+		}
+		
+	}
+}

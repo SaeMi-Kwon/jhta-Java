@@ -1,0 +1,43 @@
+package day10;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+//FileReader : 파일에서 2바이트 단위로 읽어오는 입력스트림 클래스
+public class Test06_FileReader {
+	public static void main(String[] args) {
+		
+		FileReader fr=null;
+		
+		try {
+			//public FileReader(String fileName) throws FileNotFoundException
+			fr=new FileReader("c:\\2407\\hello.txt");  //파일 읽어오는 과정해서 오류가 나면 fr값은 null 된다.
+			System.out.println("파일열기 성공!!!");
+			
+			while(true) {
+				//public int read() throws IOException 
+				// -> 스트림데이터에서 글자하나 읽어오기. 읽어올 데이터가 없으면 -1 리턴
+				int n=fr.read();
+				if(n==-1) break;
+				System.out.println((char)n);
+			}
+			
+			System.out.println("파일열기 읽기 완료!!!");
+			
+		}catch(FileNotFoundException fe) {
+			System.out.println("에러==>" + fe.getMessage());
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+			
+		}finally {
+			try {
+				if(fr!=null) fr.close();   //fr이 null 아닐때만 close해라
+			}catch(IOException e) {
+				System.out.println("에러2==>" + e.getMessage());
+			}
+		}
+		
+	}
+}

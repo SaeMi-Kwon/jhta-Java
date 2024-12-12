@@ -1,0 +1,30 @@
+package day12;
+
+/*
+ * [ 내부클래스 ]
+ * - 클래스 내부에 또 다른 클래스를 만드는 것
+ * - 내부 클래스는 외부클래스의 멤버를 자신의 멤버처럼 사용할 수 있다.
+ */
+class Outer1{  //외부클래스
+	private int a=10;
+	class Inner1{ //내부클래스
+		 private int b=10;
+		 public void printAB() {
+			 System.out.println("a:" + a + ",b:" + b);
+		 }
+	}
+	public void printA() {
+		System.out.println("a:" + a);
+	}
+	public void printAll() {
+		Inner1 inner1=new Inner1();
+		inner1.printAB();
+	}
+}
+
+public class Test08_내부클래스 {
+	public static void main(String[] args) {
+		Outer1 outer =new Outer1();
+		outer.printAll();
+	}
+}

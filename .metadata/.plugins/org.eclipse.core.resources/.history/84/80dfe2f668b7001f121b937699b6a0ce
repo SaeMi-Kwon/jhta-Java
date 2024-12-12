@@ -1,0 +1,71 @@
+package day13;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class MyFrame04 extends JFrame{
+	JLabel lbl=new JLabel("이름입력");
+	JTextField txtName=new JTextField(10);
+	JButton btnAdd=new JButton("추가");
+	JButton btnDel=new JButton("삭제");
+	JPanel pan1=new JPanel();
+	
+	List list=new List();
+	
+	public MyFrame04() {
+		setLayout(new BorderLayout());
+		
+		list.add("hong");
+		
+		pan1.add(lbl);
+		pan1.add(txtName);
+		pan1.add(btnAdd);
+		pan1.add(btnDel);
+		
+		add(pan1,BorderLayout.NORTH);
+		add(list,BorderLayout.CENTER);
+		
+		setSize(600,300);
+		setVisible(true);
+		
+		//입력된 이름이 List에 추가되도록 해보세요.
+		//클래스형식으로 작성
+//		class MyAction implements ActionListener {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				//입력된 텍스트 얻어오기
+//				String name=txtName.getText();
+//				//레이블에 출력하기
+//				list.add(name);
+//			}
+//		}
+//		//버튼을 클릭했는데 MyAction이 수행되도록 해보세요.
+//		MyAction action=new MyAction();
+		
+		//익명의 내부클래스로 작성
+		ActionListener action=new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//입력된 텍스트 얻어오기
+				String name=txtName.getText();
+				//레이블에 출력하기
+				list.add(name);	
+			}
+		};
+		btnAdd.addActionListener(action);
+	}
+}
+
+public class Test04_List {
+	public static void main(String[] args) {
+		new MyFrame04();
+	}
+}

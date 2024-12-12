@@ -1,0 +1,38 @@
+package quiz;
+
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/*
+   1. 영문으로 키보드로 문자열을 입력받아 (exit가 입력될때까지 문자열을 입력받음)
+   test.txt파일로 저장하는 프로그램을 작성해 보세요. 
+ */
+public class Test01 {
+	public static void main(String[] args) {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		
+		
+		System.out.println("영문으로 입력해주세요(exit 종료)");
+		try {
+			FileWriter fw=new FileWriter("test.txt");
+		
+			while(true) {
+				
+				String line =br.readLine();
+				
+				if(line.equals("exit")) break;
+				
+				fw.write(line + "\n");
+				
+			}
+			
+			br.close();
+		
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+	}
+}

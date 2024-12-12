@@ -1,0 +1,28 @@
+package day14_thread;
+
+class NewsThread extends Thread{
+	String[] news= {
+			"비트코인, 美 11월 CPI 예상치 부합에 10만 달러 재돌파",
+			"국힘 “이재명, 선거법 항소심 변호인 선임도 안해…재판 지연 꼼수”",
+			"돈도 경쟁력도 부족…美GM, 로보택시사업 철수",
+			"'문학, 생명 파괴에 반대하는 일'…세계 적신 '한강의 말'",
+			"국민의힘 김재섭 “질서있는 퇴진은 탄핵…당론 찬성 촉구”",
+	};
+	
+	@Override
+	public void run() {
+		int n=0;
+		while(true) {
+			String s=news[n++];
+			System.out.println(s);
+			if(n>=news.length) n=0;
+		}
+	}
+}
+
+public class Test05_news {
+	public static void main(String[] args) {
+		NewsThread thread=new NewsThread();
+		thread.start();
+	}
+}

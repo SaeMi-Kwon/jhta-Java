@@ -1,0 +1,36 @@
+package day12;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+class MyFrame16 extends JFrame{
+	JButton button1=new JButton("버튼1");
+	JButton button2=new JButton("버튼2");
+	JButton button3=new JButton("버튼3");
+	JButton button4=new JButton("버튼4");
+	JButton button5=new JButton("버튼5");
+	
+	public MyFrame16() {
+		super("나의 세번째 윈도우");
+		
+		//public void setLayout(LayoutManager manager)
+		setLayout(new BorderLayout());
+		add(button1,BorderLayout.NORTH); //String 대신 상수로 해야 오타날 일이 없다.
+		add(button2,BorderLayout.SOUTH);
+		//add(button3,"East");
+		add(button4,"West");
+		add(button5,"Center");
+		
+		setSize(600,500);
+		setVisible(true);
+	}
+}
+
+public class Test16_BorderLayout {
+	public static void main(String[] args) {	
+		new MyFrame16();
+	}
+}

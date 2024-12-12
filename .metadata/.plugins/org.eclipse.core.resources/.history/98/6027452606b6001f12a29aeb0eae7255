@@ -1,0 +1,28 @@
+package test;
+
+import java.io.Serializable;
+
+//객체의 직렬화 : 객체를 바이트 단위로 쪼개어 나열하는 것
+//역직렬화 : 바이트 단위로 나열된 데이터를 다시 객체로 조합하는 것
+
+public class Person implements Serializable{
+
+	//seriaNumber 임의로 지정준다.
+	private static final long serialVersionUID = -3180111868330755901L;
+	private String name;
+	private transient int age;  //transient : 직렬화가 되지 않음(중요한데이터를 보내고싶지않을때 데이터를 제외)
+	
+	public Person(String name,int age) {
+		this.name=name;
+		this.age=age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+}

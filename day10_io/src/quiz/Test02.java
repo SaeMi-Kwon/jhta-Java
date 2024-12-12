@@ -1,0 +1,50 @@
+package quiz;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+/*
+	2. 프로그램을 실행하면 test.txt파일의 모든 내용을 대문자로 
+	 변환해 upper_test.txt파일에 저장되도록 만들어 보세요.
+	 ## test.txt
+	 hello!
+	 my name is hong gil dong.
+	
+	 ==> 프로그램 실행후 upper_test.txt파일에 아래처럼 저장된다.
+	 HELLO!
+	 MY NAME IS HONG GIL DONG.
+ */
+public class Test02 {
+	public static void main(String[] args) {
+		
+		
+		try {
+			//public FileReader(String fileName) throws FileNotFoundException
+			FileReader fr= new FileReader("test.txt");
+			//public FileWriter(File file) throws IOException
+			FileWriter fw= new FileWriter("upper_test.txt");
+			
+			while(true) {
+				//public int read() throws IOException 
+				// -> 스트림데이터에서 글자하나 읽어오기. 읽어올 데이터가 없으면 -1 리턴
+				int test=fr.read();
+				if(test==-1) break;
+				
+				//public static char toUpperCase(char ch) : 대문자로 변경
+				fw.write(Character.toUpperCase((char)test));
+			}
+				
+			fr.close();
+			fw.close();
+			System.out.println("파일 저장완료!");
+			
+		}catch(FileNotFoundException fe) {
+			System.out.println(fe.getMessage());
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+	}
+}

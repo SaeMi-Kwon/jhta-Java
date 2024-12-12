@@ -1,0 +1,55 @@
+package day13;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+class MyFrame03 extends JFrame{
+	JTextField n1=new JTextField(5);
+	JTextField n2=new JTextField(5);
+	JTextField n3=new JTextField(5);
+	JButton btn1=new JButton("합구하기");
+	JLabel lbe=new JLabel();
+	
+	public MyFrame03() {
+		//setLayout(new FlowLayout());
+		setLayout(null);
+		
+		lbe.setText("+");
+		lbe.setLocation(80,50);
+		lbe.setText("=");
+		lbe.setLocation(110,50);
+		
+		
+		n1.setSize(50,20);
+		n1.setLocation(50,50);
+		add(n1);
+	
+		n2.setSize(50,20);
+		n2.setLocation(100,50);
+		add(n2);
+		
+		n3.setSize(50,20);
+		n3.setLocation(150,50);
+		add(n3);
+		
+		btn1.setSize(80,50);
+		btn1.setLocation(200,45);
+		add(btn1);
+		add(lbe);
+		
+		//n1.setText("홍길동");
+		setSize(600,500);
+		setVisible(true);
+	}
+		
+}
+
+public class Test03_Quiz {
+	public static void main(String[] args) {
+		new MyFrame03();
+	}
+}

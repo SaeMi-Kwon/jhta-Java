@@ -1,0 +1,24 @@
+package day10;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+//OutPutStream : 데이터를 출력하기 위한 1바이트 처리 스트림(추상클래스)
+public class Test03_OutputStream {
+	public static void main(String[] args) {
+		
+		//System클래스 --> public static final PrintStream out
+		//System.out : 표준출력장치(화면)에 출력기능을 갖는 스트림 객체 - 자바가 생성함
+		OutputStream os=System.out;
+		
+		try {
+			//public abstract void write(int b) throws IOException : 스트림데이터로부터 1바이트 출력하기 위한 메소드
+			int a=65;
+			os.write(a);
+			os.flush(); //버퍼가 다 차지 않아도 내보내라.
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+	}
+}

@@ -1,0 +1,40 @@
+package day13;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+class MyFrame05 extends JFrame{
+	JTextArea textArea=new JTextArea();
+	JTextField txtFileName=new JTextField(30);
+	JButton btnSave=new JButton("파일저장");
+	JButton btnOpen=new JButton("파일열기");
+	JPanel pan1=new JPanel();
+
+	public MyFrame05() {
+		setLayout(new BorderLayout());
+		
+		add(new JLabel("파일명"));
+		pan1.add(txtFileName);
+		pan1.add(btnSave);
+		pan1.add(btnOpen);
+		
+		add(pan1,BorderLayout.SOUTH);
+		add(textArea,BorderLayout.CENTER);
+		
+		setSize(600,500);
+		setVisible(true);
+	}
+	
+}
+
+public class Test05_TextArea {
+	public static void main(String[] args) {
+		new MyFrame05();
+	}
+}

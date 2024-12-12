@@ -1,0 +1,32 @@
+package day12;
+
+import java.io.File;
+
+//aa폴더 크기를 구해서 출력해 보세요.
+
+public class Test07_Quiz {
+	public static void main(String[] args) {
+		
+		File f=new File("c:\\2407\\test\\aa");
+		
+		long result=fileSize(f);  
+	
+		System.out.println(f.getName() +"폴더의 크기:" + result+ "bytes");
+	}
+	
+	//디렉토리안의 파일들을 모두 삭제하기
+	public static long fileSize(File f) {
+		long size=0;
+		File[] list=f.listFiles();
+	
+		for(File ff:list) { 
+			if(ff.isFile()) { 
+				size+=ff.length();
+				return size;
+			}else {
+				fileSize(ff);			
+			}
+		}
+		return size;
+	}
+}

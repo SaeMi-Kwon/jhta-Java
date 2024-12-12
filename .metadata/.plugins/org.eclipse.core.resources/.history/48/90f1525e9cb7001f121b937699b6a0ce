@@ -1,0 +1,140 @@
+package quiz;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import day13.MyFrame05;
+
+/*
+	1.번호,국어,영어점수를 입력받아 총점,평균을 계산해서 파일로 저장하고 열기버튼을 누르면
+	저장된 데이터를 읽어와 JList에 출력되도록 해보세요
+ */
+
+class MyScore extends JFrame{
+
+	protected static final String PAHT = null;
+	JTextField txtNum=new JTextField(5);
+	JTextField txtKor=new JTextField(5);
+	JTextField txtEng=new JTextField(5);
+	JButton btnSave=new JButton("저장");
+	JButton btnOpen=new JButton("열기");
+	JPanel pan1=new JPanel();
+	
+	DefaultListModel<String> model=new DefaultListModel<>();
+	JList<String> list=new JList<>(model);
+	
+	public MyScore() {
+		super("점수 윈도우");
+		setLayout(new BorderLayout());
+		
+		final String PATH="c:\\2407\\";
+		
+		pan1.add(new JLabel("번호"));
+		pan1.add(txtNum);
+		pan1.add(new JLabel("국어"));
+		pan1.add(txtKor);
+		pan1.add(new JLabel("영어"));
+		pan1.add(txtEng);
+		pan1.add(btnSave);
+		pan1.add(btnOpen);
+		
+		add(pan1,BorderLayout.NORTH);
+		add(list,BorderLayout.CENTER);
+		
+		setSize(600,500);
+		setVisible(true);
+		
+		ActionListener SaveAction=new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					//저장 버튼을 누르면 번호,국어,영어,총점,평균이 파일로 저장
+					String num=txtNum.getText();
+					
+					PrintWriter pw=new PrintWriter(new FileWriter(PATH +"//"+num+".txt"));
+				
+	
+					int kor=Integer.parseInt(txtKor.getText());
+					int eng=Integer.parseInt(txtEng.getText());
+					int sum=kor+eng;
+					double avg=sum/2.0;
+					pw.println(num+","+kor+","+eng+","+sum+","+avg);
+					
+					pw.close();
+					
+					JOptionPane.showMessageDialog(MyScore.this, "파일저장완료");
+					
+					
+				} catch (IOException ie) {
+					JOptionPane.showMessageDialog(MyScore.this, "파일을 찾을수없습니다");
+					System.out.println(ie.getMessage());
+				}
+					
+			}
+			
+		};
+		btnSave.addActionListener(SaveAction);
+		
+		
+		ActionListener OpenAction=new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					String num=txtNum.getText();
+					BufferedReader br=new BufferedReader(new FileReader(PAHT+"//"+num));
+
+	
+					while(true) {
+						String str=br.readLine();
+						if(str==null) break;  
+						
+						
+					}
+		
+					br.close();
+					
+				} catch (FileNotFoundException fe) {
+					System.out.println(fe.getMessage());
+					JOptionPane.showMessageDialog(MyScore.this, "파일이 존재하지 않아요");
+					
+				}catch (IOException ie) {
+					System.out.println(ie.getMessage());
+				}
+				
+				
+			}
+		};
+		btnOpen.addActionListener(OpenAction);
+		
+		
+		
+		
+	}
+}
+
+
+public class Test01 {
+	public static void main(String[] args) {
+		new MyScore();
+	}
+}

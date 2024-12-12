@@ -1,0 +1,19 @@
+package quiz;
+
+/*
+ 	2. 디렉토리 복사하는 프로그램을 작성해 보세요.(조금 어려워요) 
+	예)
+   	복사할 폴더
+   	c:\java
+   	복사본 폴더
+   	c:\java_copy
+   	java폴더가 java_copy폴더에 복사됨 
+ */
+
+//2. 복사할 폴더 안에 txt,디렉토리 모든걸 복사(재귀메소드이용)
+//겉에 복사본(이름만다름)
+public class Test02 {
+	public static void main(String[] args) {
+		
+	}
+}

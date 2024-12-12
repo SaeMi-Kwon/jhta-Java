@@ -1,0 +1,64 @@
+package day11_io;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/*
+ * BufferedOutputStream 과 BufferedInputStream 클래스를 사용해서 파일복사하는 프로그램을 작성해 보세요.
+ * 복사된 파일의 크기도 함께 출력해 보세요
+ * 
+ * 1.jpg -> copy.jpg
+ * test.dat -> copy.dat
+ * 
+ */
+public class Test04_Quiz {
+	public static void main(String[] args) {
+		
+		
+		
+		try {
+		
+			
+			InputStream is = new FileInputStream("test.dat");
+			BufferedInputStream bis = new BufferedInputStream(is);
+			
+			//public BufferedOutputStream(OutputStream out)
+			OutputStream os= new FileOutputStream("copy.dat");
+			BufferedOutputStream bos= new BufferedOutputStream(os);
+			
+			long len=0;
+			byte[] b1=new byte[100];
+			while(true) {
+				//파일(버퍼)에서 읽어와 b1배열에 저장, n에는 읽어온 바이트수 크기 저장(여기서는 5바이트-영문자5개)
+				//읽어올 데이터가 없으면 n에는 -1 저장
+				//public int read(byte[] b,int off,int len)throws IOException
+				int n=bis.read(b1);
+				len+=n;
+				if(n==-1) break;
+				//b1배열의 0번째 위치를 n개만큼만 화면에 출력
+				System.out.write(b1,0,n);
+				
+			}
+			System.out.println(len + "복사된 파일 크기");
+			
+			bis.close();
+			bos.close();
+			
+			
+		}catch(FileNotFoundException fe) {
+			System.out.println(fe.getMessage());
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+		
+		
+	}
+}

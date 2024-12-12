@@ -1,0 +1,112 @@
+package day13;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+class MyFrame05 extends JFrame{
+	JTextArea textArea=new JTextArea();
+	JTextField txtFileName=new JTextField(30);
+	JButton btnSave=new JButton("파일저장");
+	JButton btnOpen=new JButton("파일열기");
+	JPanel pan1=new JPanel();
+
+	public MyFrame05() {
+		setLayout(new BorderLayout());
+		
+		pan1.add(new JLabel("파일명"));
+		pan1.add(txtFileName);
+		pan1.add(btnSave);
+		pan1.add(btnOpen);
+		
+		add(pan1,BorderLayout.SOUTH);
+		add(new JScrollPane(textArea),BorderLayout.CENTER);
+		
+		setSize(600,500);
+		setVisible(true);
+		
+		//btnSave 버튼을 눌렸을때 textarea에 입력된 내용을 파일로 저장해 보세요
+		ActionListener action=new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				File f=new File(txtFileName.getText());
+				
+//				if(!f.exists()) {
+//					JOptionPane.showMessageDialog(MyFrame05.this,"파일경로오류");
+//					return;
+//				}
+				
+				try {
+					PrintWriter pw=new PrintWriter(f);  //파일에 문자열 출력하기 위한 2바이트 처리 스트림 객체
+					String text=textArea.getText(); //텍스트에리어에 입력한 텍스트 얻어오기
+					pw.println(text); //파일로 텍스트 저장하기
+					
+					pw.close();
+					
+					textArea.setText("");
+					
+					JOptionPane.showMessageDialog(MyFrame05.this, "파일저장 완료");
+					
+				} catch (IOException ie) {
+					System.out.println(ie.getMessage());
+					JOptionPane.showMessageDialog(MyFrame05.this, "파일출력 오류");
+				}
+				
+			}
+			
+		};
+		btnSave.addActionListener(action);
+		
+		//열기버튼을 클릭하면 파일의 내용을 불러와 텍스트에리어에 출력해 보세요.
+		ActionListener OpenAction=new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					BufferedReader br=new BufferedReader(new FileReader(txtFileName.getText()));
+					
+					while(true) {
+						String s=br.readLine();
+						if(s==null) break;  
+						System.out.println(s);
+					}
+				} catch (FileNotFoundException fe) {
+					System.out.println(fe.getMessage());
+					JOptionPane.showMessageDialog(MyFrame05.this, "파일이 없어요");
+					
+				}catch (IOException ie) {
+					System.out.println(ie.getMessage());
+				}
+				
+			}
+			
+		};
+		btnOpen.addActionListener(action);
+		
+	}
+	
+}
+
+public class Test05_TextArea {
+	public static void main(String[] args) {
+		new MyFrame05();
+	}
+}

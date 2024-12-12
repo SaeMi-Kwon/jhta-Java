@@ -1,0 +1,68 @@
+package day11_io;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+/*
+ * 2.Student.txt 파일의 데이터를 읽어와(BufferedReader사용)
+ * 총점/평균을 계산해서 이름,국어,영어,총점,평균이 출력되도록 해보세요.
+ * 
+ * 홍길동,100,80
+ * ..
+ * String[] a="aaa,bbb".split(",");
+ * 
+ */
+public class Test06_Quiz {
+	public static void main(String[] args) {
+		
+		try {
+			//public BufferedReader(Reader in)
+			BufferedReader br=new BufferedReader(new FileReader("Student.txt"));
+			
+			//public PrintWriter(OutputStream out)
+			OutputStream os=System.out;
+			PrintWriter pw =new PrintWriter(os);
+			
+			int sum=0;
+			double avg=0;
+			while(true) {
+				String s=br.readLine();
+				if(s==null) break;
+				System.out.println(s + " ");
+				
+				//public String[] split(String regex)
+				String[] std= s.split(",");
+				
+				for(int i=0;i<std.length;i++) {
+					System.out.println(std[i]);
+					//public static int parseInt(String s)
+					int a = Integer.parseInt(std[1]);
+					int b = Integer.parseInt(std[2]);
+					sum=a+b;
+				}
+				avg=sum/2.0;
+				
+				System.out.println("총점:" + sum);
+				System.out.println("평균:" +avg);
+			}
+
+			br.close();
+			pw.close();
+			
+		}catch(FileNotFoundException fe) {
+			System.out.println(fe.getMessage());
+			
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
+		}
+		
+		
+		
+		
+		
+	}
+}

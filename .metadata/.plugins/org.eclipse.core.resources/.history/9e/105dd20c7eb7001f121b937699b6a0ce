@@ -1,0 +1,73 @@
+package day13;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+class MyFrame05 extends JFrame{
+	JTextArea textArea=new JTextArea();
+	JTextField txtFileName=new JTextField(30);
+	JButton btnSave=new JButton("파일저장");
+	JButton btnOpen=new JButton("파일열기");
+	JPanel pan1=new JPanel();
+
+	public MyFrame05() {
+		setLayout(new BorderLayout());
+		
+		pan1.add(new JLabel("파일명"));
+		pan1.add(txtFileName);
+		pan1.add(btnSave);
+		pan1.add(btnOpen);
+		
+		add(pan1,BorderLayout.SOUTH);
+		add(new JScrollPane(textArea),BorderLayout.CENTER);
+		
+		setSize(600,500);
+		setVisible(true);
+		
+		//btnSave 버튼을 눌렸을때 textarea에 입력된 내용을 파일로 저장해 보세요
+		ActionListener action=new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String str=textArea.getText();
+				String fileName=txtFileName.getText();
+				textArea.setText("");
+				//파일저장
+				try {
+					FileWriter fw=new FileWriter(fileName);
+					//public void write(String str) throws IOException
+					fw.write(str);
+					
+					fw.close();
+					System.out.println("파일저장완료");
+					
+				} catch (IOException ie) {
+					System.out.println(ie.getMessage());
+				}
+				
+			}
+			
+		};
+		btnSave.addActionListener(action);
+		
+		
+		
+	}
+	
+}
+
+public class Test05_TextArea {
+	public static void main(String[] args) {
+		new MyFrame05();
+	}
+}

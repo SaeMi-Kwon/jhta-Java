@@ -1,0 +1,24 @@
+package quiz;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+import test.Member;
+
+public class Test01 {
+	public static void main(String[] args) {
+		HashSet<Member> member= new HashSet<>();
+		member.add(new Member("user1","1234","user1@email.com"));
+		member.add(new Member("test","5555","test@email.com"));
+		member.add(new Member("admin","1111","admin@email.com"));
+		
+		Iterator<Member> m=member.iterator();
+		
+		while(m.hasNext()) {
+			Member mm=m.next();
+			System.out.println(mm);
+		}
+	}
+
+
+}

@@ -1,0 +1,23 @@
+package day12;
+
+import java.io.File;
+
+public class Test04_Quiz {
+	public static void main(String[] args) {
+		//코드로 bb폴더를 삭제해 보세요.
+		File f=new File("c:\\2407\\test\\bb");
+		
+		File[] list=f.listFiles();
+		
+		System.out.println(f);
+
+		if(!f.isFile()) {
+			f.delete();
+			System.out.println("디렉토리를 삭제했습니다.");
+		}
+		for(File ff:list) {
+			ff.delete();
+			System.out.println("파일삭제");
+		}
+	}
+}
