@@ -1,0 +1,98 @@
+package quiz;
+
+/*
+2. 아래와 같은 상속관계의 클래스를 만들고 이를 사용해 보세요.
+
+                    사원클래스 
+                 [ 사원이름,부서 ]
+          |                            |
+          |                            |
+       정규사원                        임시사원
+[사원번호,직책,급여(본봉+수당)]    [주민번호,급여(근무시간*시급)]
+
+*/
+
+class Employee {
+	private String name;  //이름
+	private String dept;   //부서
+
+
+	public Employee(String name,String dept){
+		this.name=name;
+		this.dept=dept;
+	}
+
+
+	public void print(){
+		System.out.println("====사원정보=====");
+		System.out.println("사원이름:" + name);
+		System.out.println("부서:" + dept);
+	}
+}
+
+class RegularEmployee extends Employee{
+	private int num;   //사원번호
+	private String position;   //직책
+	private int salary;    //본봉
+	private int bonus;    //수당
+
+
+	public RegularEmployee(String name,String dept,int num,String position,int salary,int bonus){
+		super(name,dept);
+		this.num=num;
+		this.position=position;
+		this.salary=salary;
+		this.bonus=bonus;
+	}
+
+
+	public int RegularPay(){
+		return salary+bonus;
+	}
+
+
+	public void print(){
+		super.print();
+		System.out.println("사원번호:" + num);
+		System.out.println("직책:" + position);
+		System.out.println("급여:" + RegularPay());
+	}
+}
+
+
+class TempEmployee extends Employee{
+	private String tnum;  //주민번호
+	private int workTime;    //근무시간
+	private int wage;   //시급
+
+
+	public TempEmployee(String name,String dept,String tnum,int workTime,int wage){
+		super(name,dept);
+		this.tnum=tnum;
+		this.workTime=workTime;
+		this.wage=wage;
+	}
+
+
+	public int tempPay(){
+		return workTime*wage;
+	}
+
+
+	public void print(){
+		super.print();
+		System.out.println("주민번호:" + tnum);
+		System.out.println("급여:" + tempPay());
+	}
+}
+	
+public class Test02 {
+	public static void main(String[] args) {
+		RegularEmployee re=new RegularEmployee("홍길동","재무과",2,"대리",130000,50000);
+		re.print();
+
+
+		TempEmployee te=new TempEmployee("이몽룡","총무과","200508-4686352",12,10500);
+		te.print();
+	}
+}
