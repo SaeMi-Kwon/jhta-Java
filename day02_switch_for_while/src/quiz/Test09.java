@@ -1,0 +1,43 @@
+package quiz;
+
+/*
+9)for문을 사용해서 아래처럼 출력해 보세요.
+
+		****
+		 ***
+		  **
+		   *
+*/
+
+
+public class Test09 {
+	public static void main(String[] args) {
+		
+		for(int i=4;i>=1;i--) {
+			for(int j=1;j<=(4-i);j++) {   //4-i만큼 공백
+				System.out.print(" ");
+			}
+			for(int star=1;star<=i;star++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+
+//선생님 코드
+class HW9 {
+	public static void main(String[] args) 	{
+		for (int i = 0; i<4 ; i++){
+			for (int j=0; j<i ; j++ ){
+				System.out.print(" ");
+			}
+			for (int k = i; k<4; k++ ){
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
