@@ -1,10 +1,8 @@
 package day15_thread;
-
 import test.Data;
 
 //스레드간의 상호통신 : notify(),wait()
 //연결(연관)된 관계에 사용
-
 class InputThread extends Thread{
 	Data data;
 	
@@ -52,7 +50,7 @@ class OutputThread extends Thread{
 		}
 	}
 }
-public class Tset01_notify {
+public class Test01_notify {
 	public static void main(String[] args) {
 		Data data=new Data();
 		while(true) {

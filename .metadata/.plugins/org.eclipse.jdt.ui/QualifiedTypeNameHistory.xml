@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="test.Person"/>
-    <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.awt.print.Book"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
     <fullyQualifiedTypeName name="test.Data"/>
     <fullyQualifiedTypeName name="test.Bank"/>
+    <fullyQualifiedTypeName name="test.Restaurant"/>
+    <fullyQualifiedTypeName name="day15_thread.MyThread"/>
 </qualifiedTypeNameHistroy>
