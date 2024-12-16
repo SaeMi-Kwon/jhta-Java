@@ -120,12 +120,12 @@ class MyDiary extends JFrame{
 						if(str==null) break;  
 						textArea.append(str + "\n");   
 					}
-			
 					br.close();
 					
 				} catch (FileNotFoundException fe) {
 					JOptionPane.showMessageDialog(MyDiary.this, "파일을 찾지 못했습니다");
 					System.out.println(fe.getMessage());
+					
 				} catch (IOException ie) {
 					System.out.println(ie.getMessage());
 				}

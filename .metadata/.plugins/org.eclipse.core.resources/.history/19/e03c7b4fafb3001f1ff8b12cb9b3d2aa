@@ -1,9 +1,0 @@
-package quiz;
-
-//3. 파일복사 프로그램을 만들어 보세요. (FileReader/FileWriter사용)
-
-public class Test03 {
-	public static void main(String[] args) {
-		
-	}
-}

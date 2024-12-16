@@ -2,6 +2,7 @@ package day151_java8;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.Consumer;
 
 import test.Member;
 
@@ -17,6 +18,16 @@ public class Test06_Quiz {
 		
 		//public static <T extends Comparable<? super T>> void sort(List<T> list)
 		Collections.sort(list);
+		
+		
+		Consumer<Member> action=new Consumer<>() {
+			@Override
+			public void accept(Member t) {
+				System.out.println(t);
+			}
+		};
+		list.forEach(action);
+		
 		
 		//람다식 forEach 사용 
 		list.forEach(t->System.out.println(t));
