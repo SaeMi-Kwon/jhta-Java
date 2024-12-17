@@ -1,7 +1,0 @@
-package day12;
-
-public class Test02_File {
-	public static void main(String[] args) {
-		
-	}
-}

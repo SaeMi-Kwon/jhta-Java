@@ -31,6 +31,8 @@ public class Test09_Quiz {
 		list.add(new Student(4,"고길동",72));
 		
 		//학생정보 중에서 학생번호와 이름만 추출해서 이름순으로 정렬해서 출력
+		
+		//방법1
 //		//학생번호,이름 추출
 //		Function<Student,String> mapper=new Function<>() {
 //			@Override
@@ -70,6 +72,35 @@ public class Test09_Quiz {
 				return name1.compareTo(name2);
 			})
 			.forEach(System.out::println);
+		
+		
+		//방법2
+//		Comparator<Student> comparator=new Comparator<>() {
+//		@Override
+//		public int compare(Student o1, Student o2) {
+//			return o1.getName().compareTo(o2.getName());
+//		}
+//	};
+//	
+//	Comparator<Student> comparator=(o1,o2)->o1.getName().compareTo(o2.getName());
+		
+		
+		Function<Student,HashMap<String,Object>> func1=new Function<>() {
+
+			@Override
+			public HashMap<String, Object> apply(Student t) {
+				HashMap<String,Object> map=new HashMap<>();
+				map.put("num", t.getName());
+				map.put("name", t.getName());
+				return map;
+			}
+		};
+		
+		list.stream()
+			.sorted((o1,o2)->o1.getName().compareTo(o2.getName()))
+			.map(func1)
+			.forEach(System.out::println);
+		
 		
 		
 		//학생 점수들의 총합 구하기
