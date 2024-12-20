@@ -58,7 +58,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return item + ", " + price + "원, " + amount + "개, 총합:" + total +"원 입니다";
+		return item + ", " + price + "원, " + amount + "개 [총합:" + total +"원]";
 	}
 	
 

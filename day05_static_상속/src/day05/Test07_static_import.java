@@ -1,9 +1,9 @@
 package day05;
 
 //static import -> 메소드 호출시 클래스명을 쓰지 않는다.
-//import static test.Calc.add;
-//import static test.Calc.sub;
-import static test.Calc.*;
+//import static test.Calc.*;
+import static test.Calc.add;
+import static test.Calc.sub;
 
 public class Test07_static_import {
 	public static void main(String[] args) {

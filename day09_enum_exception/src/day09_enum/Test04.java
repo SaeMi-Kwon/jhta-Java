@@ -4,6 +4,7 @@ enum MyWeek{
 	SUN("일요일"),MON("월요일"),TUE("화요일"),WEB("수요일"),THU("목요일"),FRI("금요일"),SAT("토요일");
 	
 	private String weekname;
+	
 	//enum은 생성자를 갖을수 있다.(private로 만들어야 함)
 	private MyWeek(String weekname) {
 		this.weekname=weekname;
