@@ -21,34 +21,31 @@ import java.util.Scanner;
 	90점대:2
 	100점대:1
 */
+
 public class Test03 {
 	public static void main(String[] args) {
    		Scanner scan = new Scanner(System.in);
-   		int[][] scoreArray = new int[10][2];
+   		int[][] scoreArray = new int[11][2];  //0~100까지 총 11개 범위 (0~9점대, 10~19점대, ..., 100점대까지)
 
-   		//int score=0;
+        System.out.println("10개의 점수를 입력하세요");
 
-   		System.out.println("10개의 점수를 입력하세요");
-   		for(int i=0;i<10;i++) {
-       		scoreArray[i][0] = (i + 1) * 10;
-       		scoreArray[i][1] = 0;
-       		for (int j=0;j<1;j++) {
-           			scoreArray[i][0] = scan.nextInt();
-           			//score = scan.nextInt();
+        //점수 입력 받기
+        for(int i=0;i<10;i++){
+            int score=scan.nextInt();  //점수 입력받기
+            int index=score/10;   //10점 단위로 점수대 계산
+            if (index==10) {     //100점은 100점대에 포함되므로 예외 처리
+                index=9;
+            }
+            scoreArray[index][1]++;  //해당 점수대에 카운트 추가
+        }
 
-
-//            if () {              //비교( 점수/10)사용
-//                scoreArray[i][1]++;
-//            }
-       		}
-   		}
-
-
-   		for (int i = 0; i < 10; i++) {
-       		System.out.println(((i+1)*10) + "점대: " + scoreArray[i][1]);
-   		}
-
-	}
+        //점수대별 결과 출력
+        for(int i=0;i<10;i++) {
+            System.out.println(i*10 + "점대: " + scoreArray[i][1]);
+        }
+        //100점대 별도 출력
+        System.out.println("100점대: " + scoreArray[9][1]);
+    }
 }
 	
 	

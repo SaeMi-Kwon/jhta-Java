@@ -47,8 +47,7 @@ public class Test05_Quiz {
 		
 		System.out.println("<< 아이디순으로 정렬 >>");
 		list.stream()
-			.sorted((o1,o2)->o1.getId()
-			.compareTo(o2.getId()))
+			.sorted((o1,o2)->o1.getId().compareTo(o2.getId()))
 			.forEach(t->System.out.println(t));
 
 

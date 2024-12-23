@@ -12,8 +12,8 @@ public class Test06_Optional {
 		
 		Student s1=new Student(1,"홍길동",100);
 		
-		//s1를 Optional객체로 감싸기(null이 아닌 경우)
-		Optional<Student> opt=Optional.of(s1);
+		//s1를 Optional객체로 감싸기(null이 아닌 경우(null값 허용안함))
+		Optional<Student> opt=Optional.of(s1);  
 		if(opt.isPresent()) {  //객체가 존재하면
 			Student s2=opt.get(); //Optional에서 객체 꺼내오기
 			System.out.println(s2);
@@ -23,7 +23,7 @@ public class Test06_Optional {
 		
 		Student s2=null;
 		
-		//s2를 Optional객체로 감싸기 -> null인 경우도 발생될 수 있는 경우
+		//s2를 Optional객체로 감싸기 -> null인 경우도 발생될 수 있는 경우(null값 허용)
 		Optional<Student> opt1=Optional.ofNullable(s2);
 		if(opt1.isPresent()) {  //객체가 존재하면
 			Student s=opt1.get();  //Optional에서 객체 꺼내오기

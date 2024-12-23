@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -31,8 +32,8 @@ class CafeFrame extends JFrame{
 	JTextArea textArea=new JTextArea(); //주문내역 보여주는 텍스트
 	JTextField txtAmout=new JTextField(5); //수량입력
 	JButton btnSave=new JButton("담기");
-	JButton btnSel=new JButton("결정");
 	JButton btnDel=new JButton("삭제");
+	JButton btnSel=new JButton("결정");
 	JButton btnClear=new JButton("초기화");
 	
 	JPanel pan1=new JPanel();	//수량 입력 패널
@@ -41,9 +42,8 @@ class CafeFrame extends JFrame{
 	DefaultListModel<String> model=new DefaultListModel<>();
 	JList<String> list=new JList<>(model);
 	
-	ArrayList<String> menu=new ArrayList<>();
+	ArrayList<String> menu=new ArrayList<>(); 
 	ArrayList<Integer> pay=new ArrayList<>();
-	
 	ArrayList<Order> order=new ArrayList<>();
 	
 	public CafeFrame(){
@@ -76,29 +76,29 @@ class CafeFrame extends JFrame{
 		pay.add(4000);
 		
 		
+		//메뉴리스트
 		for(int i=0;i<menu.size();i++) {
 			model.addElement(menu.get(i) + " - " + pay.get(i)+ "원");
 		}
 		
-		
-		//메뉴리스트
 		JPanel listPanel=new JPanel();
 		listPanel.setLayout(new BorderLayout());
 		listPanel.add(new JScrollPane(list),BorderLayout.CENTER);
+		
 		
 		//수량입력창
 		pan1.setLayout(new FlowLayout());
 		pan1.add(new JLabel("수량"));
 		pan1.add(txtAmout);
 		
-		//버튼
+		//버튼 패널
 		pan2.setLayout(new FlowLayout());
 		pan2.add(btnSave);
-		pan2.add(btnSel);
 		pan2.add(btnDel);
+		pan2.add(btnSel);
 		pan2.add(btnClear);
 		
-		
+		//위치
 		add(pan1,BorderLayout.EAST);
 		add(listPanel,BorderLayout.WEST);
 		
@@ -118,6 +118,7 @@ class CafeFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				int index=list.getSelectedIndex();
 				if(index==-1) { 
 					JOptionPane.showMessageDialog(CafeFrame.this, "커피를 선택하세요");
@@ -135,11 +136,13 @@ class CafeFrame extends JFrame{
 				int price=Integer.parseInt(pr);
 				
 				//수량을 입력하지 않거나 잘못된 값을 입력한 경우 
-				String amtText=txtAmout.getText();
-				int amt=1; //기본값을 1로 설정
-				
+				int amt=1;
 				try {
 					amt=Integer.parseInt(txtAmout.getText()); 
+					
+					if(amt<=0) {  //0개 이하일 경우 기본값 설정
+						amt=1;
+					}
 					
 				}catch(NumberFormatException ne) {
 					JOptionPane.showMessageDialog(CafeFrame.this, "숫자를 입력하세요");
@@ -147,40 +150,20 @@ class CafeFrame extends JFrame{
 					return;
 				}
 				
-
 				order.add(new Order(item,price,amt));
 				
-				Order o=null;
-				for(int i=0;i<order.size();i++) {
-					o=order.get(i);
+				//주문 내역
+				textArea.setText(""); //텍스트 초기화
+				for(Order o:order) {
+					textArea.append(o.toString()+"\n");
 				}
-				textArea.append(o.toString()+"\n");
 				
-				
-				txtAmout.setText("");  
+				txtAmout.setText("");  //수량 초기화
 				txtAmout.requestFocus();
 			}
 			
 		};
 		btnSave.addActionListener(save);
-		
-		
-		//저장된 주문 총합계 보여주기
-		ActionListener select = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				int sum=0;
-				for(int i=0;i<order.size();i++) {
-					Order s=order.get(i);
-					sum+=s.getTotal();
-				}
-				String total=String.valueOf(sum);
-				textArea.append("총 합계:" + total + "원 입니다.");
-			}
-		};
-		btnSel.addActionListener(select);
-		
 		
 		
 		//담았던 주문을 취소
@@ -193,20 +176,31 @@ class CafeFrame extends JFrame{
 				//TextArea상의 선택부분 텍스트를 얻어옴
 				String str = textArea.getSelectedText(); 
 				
-				int start = textArea.getSelectionStart(); //선택부분의 시작점
-				int end = textArea.getSelectionEnd(); //선택부분의 끝점
-				textArea.replaceRange("", start, end); //시작부분과 끝점 사이를 공백으로 교체
 				
-				
-				String item=str.substring(0,(str.indexOf(",")));
-				System.out.println(item);
-				
+		        //선택된 텍스트가 두줄이상인 경우
+		        String[] line = str.split("\n"); // 줄바꿈 기준으로 텍스트 분리
 
-				Order o=null;
+		        if (line.length > 1) {
+		            JOptionPane.showMessageDialog(CafeFrame.this, "한 줄만 선택하여 삭제할 수 있습니다.");
+		            return; 
+		        }
+
+		        //선택된 텍스트가 한 줄일 경우
+		        String item = line[0].trim(); 
+		        if (item.indexOf(",")==-1) { 
+		            JOptionPane.showMessageDialog(CafeFrame.this, "잘못된 선택입니다.");
+		            return;
+		        }
+				
+		        
+				String orderItem=str.substring(0,(str.indexOf(",")));
+				System.out.println(orderItem);
+
+				
 				for(int i=0;i<order.size();i++) {
-					o=order.get(i);
+					Order o=order.get(i);
 					
-					if(item.equals(o.getItem())) {
+					if(orderItem.equals(o.getItem())) {
 						order.remove(i);
 						find=true;
 						break;
@@ -215,12 +209,36 @@ class CafeFrame extends JFrame{
 
 				if(!find) {
 					JOptionPane.showMessageDialog(CafeFrame.this, "삭제할 품목이 없습니다.");
+					
+				}else {
+					int start = textArea.getSelectionStart(); //선택부분의 시작점
+					int end = textArea.getSelectionEnd(); //선택부분의 끝점
+					textArea.replaceRange("", start, end); //시작부분과 끝점 사이를 공백으로 교체
 				}
-				
+
+		    
 			}
 		};
 		btnDel.addActionListener(delete);
 		
+		
+		
+		//저장된 주문 총합계 보여주기
+				ActionListener select = new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						int sum=0;
+						for(Order s:order) {
+							sum+=s.getTotal();
+						}
+						String total=String.valueOf(sum);
+						textArea.append("총 합계:" + total + "원 입니다.\n");
+					}
+				};
+				btnSel.addActionListener(select);
+				
+				
 		
 		//저장한 품목 초기화 
 		ActionListener clear = new ActionListener() {
@@ -234,7 +252,7 @@ class CafeFrame extends JFrame{
 		btnClear.addActionListener(clear);
 		
 		
-
+		//창 닫을때 파일저장 및 종료
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -271,13 +289,8 @@ class CafeFrame extends JFrame{
 			}
 		});
 		
-
 	}
-	
-	
 }
-
-
 
 public class Service {
 	public static void main(String[] args) {

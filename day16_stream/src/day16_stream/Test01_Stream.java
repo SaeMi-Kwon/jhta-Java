@@ -78,8 +78,7 @@ public class Test01_Stream {
 		
 		IntStream st4=Arrays.stream(a);
 		int s=st4.sum();  
-		//long count()
-		long c=Arrays.stream(a).count(); 
+		long c=Arrays.stream(a).count();  //long count()
 		System.out.println("배열합:" + s + ",배열요소의 갯수:" + c);
 		
 		
