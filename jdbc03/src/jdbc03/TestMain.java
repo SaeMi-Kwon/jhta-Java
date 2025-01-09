@@ -22,7 +22,7 @@ public class TestMain {
 			case 4: update(); break;
 			case 5: findNum(); break;
 			case 6: findName(); break;
-			
+			case 7: return;
 		}
 	}
 	
