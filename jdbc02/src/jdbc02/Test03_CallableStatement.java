@@ -11,6 +11,16 @@ import java.util.Properties;
 
 //CallableStatement : 저장프로시져를 호출하는 기능을 갖는 객체
 // {call <procedure-name>[(<arg1>,<arg2>,...)]}
+/*
+ * PROCEDURE addmember(num number,name VARCHAR2,phone VARCHAR2,addr VARCHAR2)
+ * IS
+ * BEGIN
+ * INSERT INTO MEMBERS VALUES(num,name,phone,addr,sysdate);
+ * COMMIT;
+ * END;
+ * /
+ * 
+ */
 
 class JDBC03{
 	public JDBC03() {
@@ -25,6 +35,7 @@ class JDBC03{
 			props.load(new FileReader("database.properties"));
 
 			String url=props.getProperty("url");
+			
 			String user=props.getProperty("user");
 			String pwd=props.getProperty("password");
 			

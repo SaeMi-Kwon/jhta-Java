@@ -23,9 +23,9 @@ public class SpaceService {
 		int n=spdao.insert(spdto);   //SpaceDAO에 insert 호출
 		
 		if(n>0) {
-			System.out.println("주차공간등록 성공!");
+			System.out.println("주차공간 등록성공!");
 		}else {
-			System.out.println("주차공간등록 실패!");
+			System.out.println("주차공간 등록실패!");
 		}
 	}
 	
@@ -42,13 +42,29 @@ public class SpaceService {
 		int n=spdao.update(spdto);
 		
 		if(n>0) {
-			System.out.println("주차공간수정 성공!");
+			System.out.println("주차공간 수정성공!");
 		}else {
-			System.out.println("주차공간수정 실패!");
+			System.out.println("주차공간 수정실패!");
 		}
 	}
 	
+	public void spaceDelete() {
+		System.out.println("삭제할 주차공간 번호");
+		int sid=scan.nextInt();
+		
+		int n=spdao.delete(sid);
+		
+		if(n>0) {
+			System.out.println("주차공간 삭제성공!");
+		}else {
+			System.out.println("주차공간 삭제실패!");
+		}
+		
+	}
+	
+
 	public void spaceFindAll() {
+		//출력
 		ArrayList<SpaceDTO> list=spdao.findAll();
 		
 		System.out.println("[ 주차 공간 목록 ]");

@@ -24,9 +24,9 @@ public class UserService {
 		int n=uedao.insert(uedto);
 		
 		if(n>0) {
-			System.out.println("사용자등록 성공!");
+			System.out.println("사용자 등록성공!");
 		}else {
-			System.out.println("사용자등록 실패!");
+			System.out.println("사용자 등록실패!");
 		}
 	}
 	
@@ -43,9 +43,9 @@ public class UserService {
 		int n=uedao.update(uedto);
 		
 		if(n>0) {
-			System.out.println("사용자수정 성공!");
+			System.out.println("사용자 수정성공!");
 		}else {
-			System.out.println("사용자수정 실패!");
+			System.out.println("사용자 수정실패!");
 		}
 	}
 	
@@ -56,15 +56,15 @@ public class UserService {
 		int n=uedao.delete(usid);
 		
 		if(n>0) {
-			System.out.println("사용자삭제 성공!");
+			System.out.println("사용자 삭제성공!");
 		}else {
-			System.out.println("사용자삭제 실패!");
+			System.out.println("사용자 삭제실패!");
 		}
 	}
 
 	public void userFindAll() {
+		//출력
 		ArrayList<UserDTO> list=uedao.findAll();
-		
 		
 		System.out.println("[ 사용자 목록 ]");
 		System.out.println("====================================");

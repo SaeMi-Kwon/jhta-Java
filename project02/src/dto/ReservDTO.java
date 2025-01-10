@@ -6,15 +6,17 @@ public class ReservDTO {
 	private int rvid;
 	private String usid;
 	private int sid;
-	private Date start_time;
-	private Date end_time;
+	private String start_time;
+	private String end_time;
 	private String status;
 	
 	
 	public ReservDTO() {}
 	
+	
+	
 	public ReservDTO(int rvid,String usid,int sid,
-				Date start_time,Date end_time,String status) {
+				String start_time,String end_time,String status) {
 		this.rvid=rvid;
 		this.usid=usid;
 		this.sid=sid;
@@ -48,19 +50,19 @@ public class ReservDTO {
 		this.sid = sid;
 	}
 
-	public Date getStart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
 
-	public Date getEnd_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
 

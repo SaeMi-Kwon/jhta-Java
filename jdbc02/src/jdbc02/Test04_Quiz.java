@@ -7,6 +7,17 @@ import java.sql.SQLException;
 
 //삭제할 회원번호를 파라미터로 전달받아 삭제하는 저장프로시져를 만들고
 //자바프로그램에서 호출해 보세요
+/*
+ * PROCEDURE delmember(dnum members.num%TYPE)
+ * IS
+ * BEGIN
+ * DELETE FROM point WHERE NUM=dnum;
+ * DELETE FROM members WHERE NUM=dnum;
+ * COMMIT;
+ * END;
+ * /
+ * 
+ */
 
 class JDBC04{
 	public JDBC04() {

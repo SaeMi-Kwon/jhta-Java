@@ -59,6 +59,29 @@ public class SpaceDAO {
 		}
 	}
 	
+	public int delete(int sid) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			con=JDBCUtil.getCon();
+			String sql="delete from space where sid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, sid);
+			int n=pstmt.executeUpdate();
+			
+			return n;
+			
+		} catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return -1;
+		
+		}finally {
+			JDBCUtil.close(con, pstmt);
+		}
+		
+	}
+	
 	public ArrayList<SpaceDTO> findAll() {
 		Connection con=null;
 		PreparedStatement pstmt=null;
