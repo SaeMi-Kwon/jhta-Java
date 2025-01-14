@@ -53,9 +53,9 @@ public class UserService {
 		System.out.println("삭제할 사용자 아이디");  
 		String usid=scan.next();
 		
-		int n=uedao.delete(usid);
+		boolean n=uedao.delete(usid);
 		
-		if(n>0) {
+		if(n==true) {
 			System.out.println("사용자 삭제성공!");
 		}else {
 			System.out.println("사용자 삭제실패!");

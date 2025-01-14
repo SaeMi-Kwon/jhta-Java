@@ -1,37 +1,43 @@
 package dto;
 
-import java.sql.Date;
-
 public class RecordDTO {
-	private int rcid;
-	private String usid;
-	private int sid;
-	private int fid;
-	private Date start_time;
-	private Date end_time; 
+	private int rcid;   
+	private int rvid;   
+	private String usid;  
+	private String location;   
+	private String start_time;    
+	private String end_time;
 	private double total_fee;
 	
 	
 	public RecordDTO() {}
 	
-	public RecordDTO(int rcid,String usid,int sid,int fid,
-				Date start_time,Date end_time,double total_fee) {
-		this.rcid=rcid;
-		this.usid=usid;
-		this.sid=sid;
-		this.fid=fid;
-		this.start_time=start_time;
-		this.end_time=end_time;
-		this.total_fee=total_fee;
+	public RecordDTO(int rcid, int rvid, String usid, String location, 
+			String start_time, String end_time, double total_fee) {
+		this.rcid = rcid;
+		this.rvid = rvid;
+		this.usid = usid;
+		this.location = location;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.total_fee = total_fee;
 	}
-	
 
+	
 	public int getRcid() {
 		return rcid;
 	}
 
 	public void setRcid(int rcid) {
 		this.rcid = rcid;
+	}
+
+	public int getRvid() {
+		return rvid;
+	}
+
+	public void setRvid(int rvid) {
+		this.rvid = rvid;
 	}
 
 	public String getUsid() {
@@ -42,35 +48,27 @@ public class RecordDTO {
 		this.usid = usid;
 	}
 
-	public int getSid() {
-		return sid;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setSid(int sid) {
-		this.sid = sid;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public int getFid() {
-		return fid;
-	}
-
-	public void setFid(int fid) {
-		this.fid = fid;
-	}
-
-	public Date getStart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
 
-	public Date getEnd_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
 
@@ -81,9 +79,5 @@ public class RecordDTO {
 	public void setTotal_fee(double total_fee) {
 		this.total_fee = total_fee;
 	}
-	
-	
-	
-	
 	
 }

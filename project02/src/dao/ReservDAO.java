@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import db.JDBCUtil;
 import dto.ReservDTO;
+import dto.ReservFindDTO;
 
 public class ReservDAO {
 	
@@ -19,16 +20,14 @@ public class ReservDAO {
 		try {
 			con=JDBCUtil.getCon();
 			String sql="insert into parking_reservation "
-					+ "values(?,?,?,to_date(?,'RR/MM/DD HH24:MI'),"
-					+ "to_date(?,'RR/MM/DD HH24:MI'),?)";   
+					+ "values(RESERV_SEQ.NEXTVAL,?,?,to_date(?,'RR/MM/DD HH24:MI'),"
+					+ "to_date(?,'RR/MM/DD HH24:MI'),'예정')";   
 				
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, rvdto.getRvid());
-			pstmt.setString(2, rvdto.getUsid());
-			pstmt.setInt(3, rvdto.getSid());
-			pstmt.setString(4, rvdto.getStart_time());
-			pstmt.setString(5, rvdto.getEnd_time());
-			pstmt.setString(6, rvdto.getStatus());
+			pstmt.setString(1, rvdto.getUsid());
+			pstmt.setInt(2, rvdto.getSid());
+			pstmt.setString(3, rvdto.getStart_time());
+			pstmt.setString(4, rvdto.getEnd_time());
 			int n=pstmt.executeUpdate();
 			
 			return n;
@@ -94,7 +93,7 @@ public class ReservDAO {
 	}
 	
 	
-	public int delete(int rvid) {
+	public int deleteId(int rvid) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		
@@ -116,7 +115,29 @@ public class ReservDAO {
 		}
 	}
 	
-	public ArrayList<ReservDTO> findAll() {
+	public int deleteCancel() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			con=JDBCUtil.getCon();
+			String sql="delete from parking_reservation where status='취소'";
+			pstmt=con.prepareStatement(sql);
+			int n=pstmt.executeUpdate();
+			
+			return n;
+			
+		} catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return -1;
+		
+		}finally {
+			JDBCUtil.close(con,pstmt);
+		}
+	}
+	
+	
+	public ArrayList<ReservFindDTO> findAll() {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -124,23 +145,24 @@ public class ReservDAO {
 		try {
 			con=JDBCUtil.getCon();
 		
-			String sql="select rvid,usid,sid,"
+			String sql="select rvid, usid, s.location,"
 					+ "to_char(start_time,'YY/MM/DD HH24:MI')start_time, "
 					+ "to_char(end_time,'YY/MM/DD HH24:MI')end_time,status "
-					+ "from parking_reservation order by rvid";
+					+ "from parking_reservation pv join space s "
+					+ "on pv.sid=s.sid order by rvid";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 
-			ArrayList<ReservDTO> list=new ArrayList<>();
+			ArrayList<ReservFindDTO> list=new ArrayList<>();
 			while(rs.next()) {
 				int rvid=rs.getInt("rvid");
 				String usid=rs.getString("usid");
-				int sid=rs.getInt("sid");
+				String location=rs.getString("location");
 				String start=rs.getString("start_time");
 				String end=rs.getString("end_time");
 				String status=rs.getString("status");
 				
-				ReservDTO rvdto=new ReservDTO(rvid,usid,sid,start,end,status);
+				ReservFindDTO rvdto=new ReservFindDTO(rvid,usid,location,start,end,status);
 				list.add(rvdto);
 			}
 			
@@ -155,7 +177,7 @@ public class ReservDAO {
 		}
 	}
 	
-	public ArrayList<ReservDTO> findByUsid(String userid) {
+	public ArrayList<ReservFindDTO> findByUsid(String userid) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -163,25 +185,26 @@ public class ReservDAO {
 		try {
 			con=JDBCUtil.getCon();
 		
-			String sql="select rvid,usid,sid,"
+			String sql="select rvid, usid, s.location,"
 					+ "to_char(start_time,'YY/MM/DD HH24:MI')start_time, "
 					+ "to_char(end_time,'YY/MM/DD HH24:MI')end_time,status "
-					+ "from parking_reservation where usid=? order by rvid";
+					+ "from parking_reservation pv join space s "
+					+ "on pv.sid=s.sid where usid=? order by rvid";
 		
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			rs=pstmt.executeQuery();
 
-			ArrayList<ReservDTO> list=new ArrayList<>();
+			ArrayList<ReservFindDTO> list=new ArrayList<>();
 			while(rs.next()) {
 				int rvid=rs.getInt("rvid");
 				String usid=rs.getString("usid");
-				int sid=rs.getInt("sid");
+				String location=rs.getString("location");
 				String start=rs.getString("start_time");
 				String end=rs.getString("end_time");
 				String status=rs.getString("status");
 				
-				ReservDTO rvdto=new ReservDTO(rvid,usid,sid,start,end,status);
+				ReservFindDTO rvdto=new ReservFindDTO(rvid,usid,location,start,end,status);
 				list.add(rvdto);
 			}
 			

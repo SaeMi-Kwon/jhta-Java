@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,25 +63,30 @@ public class UserDAO {
 	}
 	
 	//삭제시 외래키까지 삭제되도록
-	public int delete(String usid) {
+	public boolean delete(String usid) {
 		Connection con=null;
-		PreparedStatement pstmt=null;
+		CallableStatement cstmt=null;
 		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="delete from parking_user where usid=?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1,usid);
-			int n=pstmt.executeUpdate();
+			String sql="{call deleteUser(?)}";
+			cstmt=con.prepareCall(sql);
+			cstmt.setString(1, usid);
+			cstmt.execute();
 			
-			return n;
+			return true;
 			
 		} catch (SQLException s) {
 			System.out.println(s.getMessage());
-			return -1;
+			return false;
 			
 		}finally {
-			JDBCUtil.close(con, pstmt);
+			JDBCUtil.close(con);
+			try {
+				if(cstmt!=null) cstmt.close();
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+			}
 		}
 	}
 	
@@ -91,7 +97,7 @@ public class UserDAO {
 		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="select * from parking_user";
+			String sql="select * from parking_user order by usid";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			

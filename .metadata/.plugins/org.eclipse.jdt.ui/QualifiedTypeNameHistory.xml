@@ -58,6 +58,6 @@
     <fullyQualifiedTypeName name="dto.SpaceDTO"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="db.JDBCUtil"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="db.JDBCUtil"/>
 </qualifiedTypeNameHistroy>

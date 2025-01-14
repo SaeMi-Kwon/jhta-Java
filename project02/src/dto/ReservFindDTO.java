@@ -1,27 +1,24 @@
 package dto;
 
-
-public class ReservDTO {
+public class ReservFindDTO {
 	private int rvid;
 	private String usid;
-	private int sid;
+	private String location;
 	private String start_time;
 	private String end_time;
 	private String status;
 	
 	
-	public ReservDTO() {}
-	
-	
-	
-	public ReservDTO(int rvid,String usid,int sid,
-				String start_time,String end_time,String status) {
-		this.rvid=rvid;
-		this.usid=usid;
-		this.sid=sid;
-		this.start_time=start_time;
-		this.end_time=end_time;
-		this.status=status;
+	public ReservFindDTO() {}
+
+	public ReservFindDTO(int rvid, String usid, String location, 
+			String start_time, String end_time, String status) {
+		this.rvid = rvid;
+		this.usid = usid;
+		this.location = location;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.status = status;
 	}
 
 	
@@ -41,12 +38,12 @@ public class ReservDTO {
 		this.usid = usid;
 	}
 
-	public int getSid() {
-		return sid;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setSid(int sid) {
-		this.sid = sid;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getStart_time() {
@@ -72,4 +69,5 @@ public class ReservDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 }

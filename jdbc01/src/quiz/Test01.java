@@ -11,9 +11,19 @@ import java.util.Scanner;
 /*
  * 회원아이디/비밀번호/이메일/전화번호/가입일에 대한 정보를 갖는 테이블을 생성하고 
  * 아래와 같은 기능을 갖는 프로그램을 완성해 보세요.
- * 
+ * 	
  * 1.회원가입 2.회원조회 3.회원수정 4.회원삭제 5.전체조회
  * - 회원가입시 아이디 중복체크를 하세요.
+ * 
+ * << 회원테이블 생성 >>
+ * create table member(
+ * 	  id varchar2(10) primary key,
+ * 	  pwd varchar2(10) not null,
+ * 	  email varchar2(25),
+ * 	  phone varchar2(15),
+ * 	  regdate date
+ * );
+ * 
  */
 
 class MyJDBC01{

@@ -1,26 +1,25 @@
 package dao;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import db.JDBCUtil;
-import dto.SpaceDTO;
+import dto.FeeDTO;
 
-public class SpaceDAO {
 
-	public int insert(String location) {
+public class FeeDAO {
+	
+	public int insert(Double fee) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="insert into space values(SPACE_SEQ.NEXTVAL,?,'Y')";
+			String sql="insert into fee values(FEE_SEQ.NEXTVAL,?)";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, location);
+			pstmt.setDouble(1, fee);
 			int n=pstmt.executeUpdate();
 			
 			return n;
@@ -33,89 +32,85 @@ public class SpaceDAO {
 			JDBCUtil.close(con,pstmt);
 		}
 	}
-	
-	public int update(SpaceDTO spdto) {
+
+	public int update(int fid,Double fee) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
+		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="update space set location=? where sid=?";
+			String sql="update fee set hourly_rate=? where fid=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, spdto.getLocation());
-			pstmt.setInt(2, spdto.getSid());
+			pstmt.setDouble(1, fee);
+			pstmt.setDouble(2, fid);
 			int n=pstmt.executeUpdate();
 			
 			return n;
-		
+			
 		} catch (SQLException s) {
 			System.out.println(s.getMessage());
 			return -1;
 		
 		}finally {
-			JDBCUtil.close(con, pstmt);
+			JDBCUtil.close(con,pstmt);
 		}
+		
 	}
 	
-	public boolean delete(int sid) {
+	public int delete(int fid) {
 		Connection con=null;
-		CallableStatement cstmt=null;
+		PreparedStatement pstmt=null;
 		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="{call deleteSpace(?)}";
-			cstmt=con.prepareCall(sql);
-			cstmt.setInt(1, sid);
-			cstmt.execute();
+			String sql="delete from fee where fid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setDouble(1, fid);
+			int n=pstmt.executeUpdate();
 			
-			return true;
-		
+			return n;
+			
 		} catch (SQLException s) {
 			System.out.println(s.getMessage());
-			return false;
+			return -1;
 		
 		}finally {
-			JDBCUtil.close(con);
-			
-			try {
-				if(cstmt!=null) cstmt.close();
-			} catch (SQLException se) {
-				System.out.println(se.getMessage());
-			}
+			JDBCUtil.close(con,pstmt);
 		}
 		
 	}
 	
-	public ArrayList<SpaceDTO> findAll() {
+	public ArrayList<FeeDTO> findAll() {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
 		try {
 			con=JDBCUtil.getCon();
-			String sql="select * from space order by sid";
+			String sql="select * from fee order by fid";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
-			ArrayList<SpaceDTO> list=new ArrayList<>();
+			ArrayList<FeeDTO> list=new ArrayList<>();
 			while(rs.next()) {
-				int sid=rs.getInt("sid");
-				String location=rs.getString("location");
-				String useyn=rs.getString("useyn");
+				int fid=rs.getInt("fid");
+				double fee=rs.getDouble("hourly_rate");
 				
-				SpaceDTO spdto=new SpaceDTO(sid,location,useyn);
+				FeeDTO fdto=new FeeDTO(fid,fee);
 				
-				list.add(spdto);
+				list.add(fdto);
+				
 			}
 			
 			return list;
 			
-		}catch(SQLException s) {
+		} catch (SQLException s) {
 			System.out.println(s.getMessage());
 			return null;
-			
-		}finally {
-			JDBCUtil.close(con, pstmt, rs);
 		}
+		
+		
+		
 	}
 	
 }

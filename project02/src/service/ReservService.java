@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import dao.ReservDAO;
 import dto.ReservDTO;
+import dto.ReservFindDTO;
 
 
 public class ReservService {
@@ -12,8 +13,6 @@ public class ReservService {
 	ReservDAO rvdao=new ReservDAO();
 	
 	public void reservInsert() {
-		System.out.println("예약번호");
-		int rvid=scan.nextInt();
 		System.out.println("사용자아이디");
 		String usid=scan.next();
 		System.out.println("주차공간아이디");
@@ -23,10 +22,8 @@ public class ReservService {
 		String start=scan.nextLine();
 		System.out.println("예약 종료시간(예:25/01/01 13:00)");
 		String end=scan.nextLine();
-		System.out.println("예약상태(예정/완료/취소)");
-		String status=scan.next();
 		
-		ReservDTO rvdto=new ReservDTO(rvid,usid,sid,start,end,status);
+		ReservDTO rvdto=new ReservDTO(-1,usid,sid,start,end,null);
 		
 		int n=rvdao.insert(rvdto);
 		
@@ -62,7 +59,7 @@ public class ReservService {
 		System.out.println("수정할 예약번호");
 		int rvid=scan.nextInt();
 		
-		System.out.println("예약상태 변경(예정/완료/취소)");
+		System.out.println("예약상태 변경(완료/취소)");
 		String status=scan.next();
 		
 		int n=rvdao.updateStatus(rvid, status);
@@ -76,11 +73,11 @@ public class ReservService {
 	}
 	
 	
-	public void reservDelete() {
+	public void DeleteId() {
 		System.out.println("삭제할 예정번호");
 		int rvid=scan.nextInt();
 		
-		int n=rvdao.delete(rvid);
+		int n=rvdao.deleteId(rvid);
 		
 		if(n>0) {
 			System.out.println("예약 삭제성공!");
@@ -90,18 +87,29 @@ public class ReservService {
 		
 	}
 	
+	public void DeleteCancel() {
+		int n=rvdao.deleteCancel();
+		
+		if(n>0) {
+			System.out.println("예약취소 삭제성공!");
+		}else {
+			System.out.println("예약취소 삭제실패!");
+		}
+	}
+	
+	
 	public void findAll() {
 		//출력
-		ArrayList<ReservDTO>list=rvdao.findAll();
+		ArrayList<ReservFindDTO>list=rvdao.findAll();
 		
 		System.out.println("[ 예약 전체목록 ]");
 		System.out.println("====================================");
-		for(ReservDTO rvdto:list) {
-			System.out.println("예약번호:"+rvdto.getRvid());
-			System.out.println("사용자아이디:"+rvdto.getUsid());
-			System.out.println("주차공간번호:"+rvdto.getSid());
-			System.out.println("예약 시간:"+rvdto.getStart_time() + " ~ " + rvdto.getEnd_time());
-			System.out.println("예약 상태:"+rvdto.getStatus());
+		for(ReservFindDTO rvdto:list) {
+			System.out.println("예약번호: "+rvdto.getRvid());
+			System.out.println("사용자아이디: "+rvdto.getUsid());
+			System.out.println("주차공간위치: "+rvdto.getLocation());
+			System.out.println("예약 시간: "+rvdto.getStart_time() + " ~ " + rvdto.getEnd_time());
+			System.out.println("예약 상태: "+rvdto.getStatus());
 			System.out.println("--------------------------------------------");
 		}
 		
@@ -111,15 +119,15 @@ public class ReservService {
 		System.out.println("조회할 사용자아이디");
 		String userid=scan.next();
 		
-		ArrayList<ReservDTO>list=rvdao.findByUsid(userid);
+		ArrayList<ReservFindDTO>list=rvdao.findByUsid(userid);
 		System.out.println( "["+userid+"님의 예약 목록 ]");
 		System.out.println("====================================");
-		for(ReservDTO rvdto:list) {
-			System.out.println("예약번호:"+rvdto.getRvid());
-			System.out.println("사용자아이디:"+rvdto.getUsid());
-			System.out.println("주차공간번호:"+rvdto.getSid());
-			System.out.println("예약 시간:"+rvdto.getStart_time() + " ~ " + rvdto.getEnd_time());
-			System.out.println("예약 상태:"+rvdto.getStatus());
+		for(ReservFindDTO rvdto:list) {
+			System.out.println("예약번호: "+rvdto.getRvid());
+			System.out.println("사용자아이디: "+rvdto.getUsid());
+			System.out.println("주차공간위치: "+rvdto.getLocation());
+			System.out.println("예약 시간: "+rvdto.getStart_time() + " ~ " + rvdto.getEnd_time());
+			System.out.println("예약 상태: "+rvdto.getStatus());
 			System.out.println("--------------------------------------------");
 		}
 		
